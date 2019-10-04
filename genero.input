@@ -1,0 +1,8 @@
+cliente
+id-sequency nome-letters-size-5-10 localizacao-letters-size-8-10
+10
+postgres
+123
+lbd
+127.0.0.1
+5432

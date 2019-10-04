@@ -1,0 +1,8 @@
+cliente
+id-sequency sexo-letters-size-1-1 endereco-letters-size-8-10 nome-letters-size-8-10 data_de_admissao-randomdate
+5
+postgres
+123
+lbd
+127.0.0.1
+5432
