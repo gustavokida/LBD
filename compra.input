@@ -1,8 +1,0 @@
-compra
-data-randomdate preco_total-randomfloat-interval-500-3000 desconto-randomfloat-interval-5-10 preco_final-randomfloat-interval-500-3000 id-sequency clienteid-fk_integer-cliente-id fk_funcionario_id-fk_integer-funcionario-id
-1
-postgres
-123
-lbd
-127.0.0.1
-5432

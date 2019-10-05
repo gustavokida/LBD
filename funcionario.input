@@ -1,8 +1,0 @@
-funcionario
-id-sequency funcao-letters-size-5-10 nome-letters-size-8-10 salario-randomfloat-interval-500.0-3000.0 data_de_admissao-randomdate
-5
-postgres
-123
-lbd
-127.0.0.1
-5432

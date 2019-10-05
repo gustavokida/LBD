@@ -1,107 +1,101 @@
-/* v4: */
+CREATE TABLE Autor (
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Nacionalidade VARCHAR NOT NULL,
+    Nome VARCHAR NOT NULL,
+    Data_de_Nascimento DATE NOT NULL,
+    Data_de_Falecimento DATE NOT NULL
+);
 
 CREATE TABLE Cliente (
-    Endereco VARCHAR,
-    Sexo VARCHAR,
-    ID INTEGER PRIMARY KEY,
-    Nome VARCHAR,
-    Data_de_Nascimento DATE
-);
-
-CREATE TABLE Funcionario (
-    ID INTEGER PRIMARY KEY,
-    Funcao VARCHAR,
-    Nome VARCHAR,
-    Salario FLOAT,
-    Data_de_Admissao DATE
-);
-
-CREATE TABLE Autor (
-    ID INTEGER PRIMARY KEY,
-    Nacionalidade VARCHAR,
-    Nome VARCHAR,
-    Data_Nascimento DATE,
-    Data_Falecimento DATE
-);
-
-CREATE TABLE Genero (
-    ID INTEGER PRIMARY KEY,
-    Nome VARCHAR,
-    Localizacao VARCHAR
-);
-
-CREATE TABLE Manga (
-    ID INTEGER PRIMARY KEY,
-    Capitulo INTEGER,
-    fk_Volume_ID INTEGER,
-    Titulo_do_Capitulo VARCHAR
-);
-
-CREATE TABLE Livro (
-    Nome_do_Volume VARCHAR,
-    Sinopse VARCHAR,
-    ID INTEGER PRIMARY KEY,
-    Titulo_do_Livro VARCHAR
-);
-
-CREATE TABLE Volume (
-    Sinopse VARCHAR,
-    Numero INTEGER,
-    Nome VARCHAR,
-    ID INTEGER PRIMARY KEY
-);
-
-CREATE TABLE Revista (
-    Empresa VARCHAR,
-    Edicao INTEGER,
-    ID INTEGER PRIMARY KEY
-);
-
-CREATE TABLE Produtos_Comprados (
-    ID INTEGER PRIMARY KEY,
-    fk_Compra_ID INTEGER,
-    fk_Midia_ID INTEGER
+    Endereco VARCHAR NOT NULL,
+    Sexo VARCHAR NOT NULL,
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Nome VARCHAR NOT NULL,
+    Data_de_Nascimento DATE NOT NULL
 );
 
 CREATE TABLE Compra (
-    Data DATE,
-    Preco_Total FLOAT,
-    Desconto FLOAT,
-    Preco_Final FLOAT,
-    ID INTEGER PRIMARY KEY,
-    ClienteID INTEGER,
-    fk_Funcionario_ID INTEGER
+    Data DATE NOT NULL,
+    Preco_Total FLOAT NOT NULL,
+    Desconto FLOAT NOT NULL,
+    Preco_Final FLOAT NOT NULL,
+    ID INTEGER PRIMARY KEY NOT NULL,
+    fk_Cliente_ID INTEGER NOT NULL,
+    fk_Funcionario_ID INTEGER NOT NULL
+);
+
+CREATE TABLE Funcionario (
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Funcao VARCHAR NOT NULL,
+    Nome VARCHAR NOT NULL,
+    Salario FLOAT NOT NULL,
+    Data_de_Admissao DATE NOT NULL
+);
+
+CREATE TABLE Genero (
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Nome VARCHAR NOT NULL,
+    Localizacao VARCHAR NOT NULL
+);
+
+CREATE TABLE Livro (
+    Nome_do_Volume VARCHAR NOT NULL,
+    Sinopse VARCHAR NOT NULL,
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Titulo_do_Livro VARCHAR NOT NULL
+);
+
+CREATE TABLE Manga (
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Capitulo INTEGER NOT NULL,
+    fk_Volume_ID INTEGER NOT NULL,
+    Titulo_do_Capitulo VARCHAR NOT NULL
 );
 
 CREATE TABLE Midia (
-    ID INTEGER PRIMARY KEY,
-    Data_de_Publicacao INTEGER,
-    Editora INTEGER,
-    Nome VARCHAR,
-    Idioma INTEGER,
-    Local_de_Publicacao VARCHAR,
-    fk_Genero_ID INTEGER,
-    fk_Autor_ID INTEGER,
-    fk_Revista_ID INTEGER,
-    fk_Manga_ID INTEGER,
-    fk_Livro_ID INTEGER
+    ID INTEGER PRIMARY KEY NOT NULL,
+    Data_de_Publicacao DATE NOT NULL,
+    Editora VARCHAR NOT NULL,
+    Nome VARCHAR NOT NULL,
+    Idioma VARCHAR NOT NULL,
+    Local_de_Publicacao VARCHAR NOT NULL,
+    fk_Genero_ID INTEGER NOT NULL,
+    fk_Autor_ID INTEGER NOT NULL,
+    fk_Revista_ID INTEGER NOT NULL,
+    fk_Manga_ID INTEGER NOT NULL,
+    fk_Livro_ID INTEGER NOT NULL
+);
+
+CREATE TABLE Produtos_Comprados (
+    ID INTEGER PRIMARY KEY NOT NULL,
+    fk_Compra_ID INTEGER NOT NULL,
+    fk_Midia_ID INTEGER NOT NULL
+);
+
+CREATE TABLE Revista (
+    Empresa VARCHAR NOT NULL,
+    Edicao INTEGER NOT NULL,
+    ID INTEGER PRIMARY KEY NOT NULL
+);
+
+CREATE TABLE Volume (
+    Sinopse VARCHAR NOT NULL,
+    Numero INTEGER NOT NULL,
+    Nome VARCHAR NOT NULL,
+    ID INTEGER PRIMARY KEY NOT NULL
 );
  
 ALTER TABLE Compra ADD CONSTRAINT FK_Compra_1
-    FOREIGN KEY (ClienteID)
+    FOREIGN KEY (fk_Cliente_ID)
     REFERENCES Cliente (ID);
  
 ALTER TABLE Compra ADD CONSTRAINT FK_Compra_2
     FOREIGN KEY (fk_Funcionario_ID)
-    REFERENCES Funcionario (ID);
+    REFERENCES Funcionario (ID);   
  
-ALTER TABLE Produtos_Comprados ADD CONSTRAINT FK_Produtos_Comprados_1
-    FOREIGN KEY (fk_Compra_ID)
-    REFERENCES Compra (ID);
-
-ALTER TABLE Produtos_Comprados ADD CONSTRAINT FK_Produtos_Comprados_2
-    FOREIGN KEY (fk_Midia_ID)
-    REFERENCES Midia (ID);
+ALTER TABLE Manga ADD CONSTRAINT FK_Manga_1
+    FOREIGN KEY (fk_Volume_ID)
+    REFERENCES Volume (ID);
  
 ALTER TABLE Midia ADD CONSTRAINT FK_Midia_1
     FOREIGN KEY (fk_Genero_ID)
@@ -121,8 +115,12 @@ ALTER TABLE Midia ADD CONSTRAINT FK_Midia_4
 
 ALTER TABLE Midia ADD CONSTRAINT FK_Midia_5
     FOREIGN KEY (fk_Livro_ID)
-    REFERENCES Livro (ID);    
+    REFERENCES Livro (ID); 
  
-ALTER TABLE Manga ADD CONSTRAINT FK_Manga_1
-    FOREIGN KEY (fk_Volume_ID)
-    REFERENCES Volume (ID);
+ALTER TABLE Produtos_Comprados ADD CONSTRAINT FK_Produtos_Comprados_1
+    FOREIGN KEY (fk_Compra_ID)
+    REFERENCES Compra (ID);
+    
+ALTER TABLE Produtos_Comprados ADD CONSTRAINT FK_Produtos_Comprados_2
+    FOREIGN KEY (fk_Midia_ID)
+    REFERENCES Midia (ID);
