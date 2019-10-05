@@ -271,37 +271,37 @@ def insert_random_data_in_table(table_name: str, field_list: list, rows: int, us
 fields_dict = {}
 table_names_list = list('autor, volume, manga, genero, livro, revista, midia, cliente, funcionario, compra, produtos_comprados'.split(', '))
 
-fields = ['id-sequence', 'nacionalidade-letters-size-8-10', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate', 'data_de_falecimento-randomdate']
+fields = ['nacionalidade-letters-size-8-10', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate', 'data_de_falecimento-randomdate']
 fields_dict['autor'] = fields
 
-fields = ['id-sequence', 'endereco-letters-size-8-10', 'sexo-letters-size-1-1', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate']
+fields = ['endereco-letters-size-8-10', 'sexo-letters-size-1-1', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate']
 fields_dict['cliente'] = fields
 
-fields = ['id-sequence', 'data-randomdate', 'preco_total-randomfloat-interval-50.0-3000', 'desconto-randomfloat-interval-5-10', 'preco_final-randomfloat-interval-500-3000', 'fk_cliente_id-fk_integer-cliente-id', 'fk_funcionario_id-fk_integer-funcionario-id']
+fields = ['data-randomdate', 'preco_total-randomfloat-interval-50.0-3000', 'desconto-randomfloat-interval-5-10', 'preco_final-randomfloat-interval-500-3000', 'fk_cliente_id-fk_integer-cliente-id', 'fk_funcionario_id-fk_integer-funcionario-id']
 fields_dict['compra'] = fields
 
-fields = ['id-sequence', 'funcao-letters-size-8-10', 'nome-letters-size-8-10', 'salario-randomfloat-interval-50.0-3000', 'data_de_admissao-randomdate']
+fields = ['funcao-letters-size-8-10', 'nome-letters-size-8-10', 'salario-randomfloat-interval-50.0-3000', 'data_de_admissao-randomdate']
 fields_dict['funcionario'] = fields
 
-fields = ['id-sequence', 'nome-letters-size-8-10', 'localizacao-letters-size-8-10']
+fields = ['nome-letters-size-8-10', 'localizacao-letters-size-8-10']
 fields_dict['genero'] = fields
 
-fields = ['id-sequence', 'nome_do_volume-letters-size-8-10', 'sinopse-letters-size-8-10', 'titulo_do_livro-letters-size-8-10']
+fields = ['nome_do_volume-letters-size-8-10', 'sinopse-letters-size-8-10', 'titulo_do_livro-letters-size-8-10']
 fields_dict['livro'] = fields
 
-fields = ['id-sequence', 'capitulo-randominteger-interval-1-900', 'fk_volume_id-fk_integer-volume-id', 'titulo_do_capitulo-letters-size-8-10']
+fields = ['capitulo-randominteger-interval-1-900', 'fk_volume_id-fk_integer-volume-id', 'titulo_do_capitulo-letters-size-8-10']
 fields_dict['manga'] = fields
 
-fields = ['id-sequence', 'data_de_publicacao-randomdate', 'editora-letters-size-8-10', 'nome-letters-size-8-10', 'idioma-letters-size-8-10', 'local_de_publicacao-letters-size-8-10', 'fk_genero_id-fk_integer-genero-id', 'fk_autor_id-fk_integer-autor-id', 'fk_revista_id-fk_integer-revista-id', 'fk_manga_id-fk_integer-manga-id', 'fk_livro_id-fk_integer-livro-id']
+fields = ['data_de_publicacao-randomdate', 'editora-letters-size-8-10', 'nome-letters-size-8-10', 'idioma-letters-size-8-10', 'local_de_publicacao-letters-size-8-10', 'fk_genero_id-fk_integer-genero-id', 'fk_autor_id-fk_integer-autor-id', 'fk_revista_id-fk_integer-revista-id', 'fk_manga_id-fk_integer-manga-id', 'fk_livro_id-fk_integer-livro-id']
 fields_dict['midia'] = fields
 
-fields = ['id-sequence', 'fk_compra_id-fk_integer-compra-id', 'fk_midia_id-fk_integer-midia-id']
+fields = ['fk_compra_id-fk_integer-compra-id', 'fk_midia_id-fk_integer-midia-id']
 fields_dict['produtos_comprados'] = fields
 
-fields = ['id-sequence', 'empresa-letters-size-8-10', 'edicao-randominteger-interval-1-900']
+fields = ['empresa-letters-size-8-10', 'edicao-randominteger-interval-1-900']
 fields_dict['revista'] = fields
 
-fields = ['id-sequence', 'sinopse-letters-size-8-10', 'numero-randominteger-interval-1-900', 'nome-letters-size-8-10']
+fields = ['sinopse-letters-size-8-10', 'numero-randominteger-interval-1-900', 'nome-letters-size-8-10']
 fields_dict['volume'] = fields
 
 connection = create_connection('postgres', '123', 'lbd')
