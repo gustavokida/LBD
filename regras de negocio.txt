@@ -1,0 +1,15 @@
+Regras de negócio da livraria:
+1 - O cliente pode se cadastrar sem ter feito compra alguma;
+2 - O cliente poder realizar várias compras, podem ser também no mesmo dia;
+3 - A mídia não é distinguível quando possui as mesmas características;
+4 - Cada compra possui informa ao menos uma mídia e sua quantidade;
+5 - Várias compras podem se referir à mesma mídia;
+6 - Cada mídia é uma revista, mangá ou livro;
+7 - Cada mangá deve se refenciar a somente um volume;
+8 - Vários mangás podem se referir a um volume;
+9 - Um autor é cadastrado sem precisar referenciar à mídia;
+10 - Vários autores podem se referir a uma mídia;
+11 - Várias mídias podem se referir a um autor;
+12 - Um funcionário pode ser cadastrado independente de qualquer coisa;
+13 - Uma compra deve se referir a somente um cliente e um funcionário;
+14 - Uma mídia deve referenciar um gênero;
