@@ -5,8 +5,8 @@ Regras de negócio da livraria:
 4 - Cada compra possui informa ao menos uma mídia e sua quantidade;
 5 - Várias compras podem se referir à mesma mídia;
 6 - Cada mídia é uma revista, mangá ou livro;
-7 - Cada mangá deve se refenciar a somente um volume;
-8 - Vários mangás podem se referir a um volume;
+7 - Cada capítulo deve se refenciar a somente um volume;
+8 - Vários capítulos podem se referir a um volume;
 9 - Um autor é cadastrado sem precisar referenciar à mídia;
 10 - Vários autores podem se referir a uma mídia;
 11 - Várias mídias podem se referir a um autor;
