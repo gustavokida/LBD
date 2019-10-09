@@ -13,7 +13,7 @@ Regras de negócio da livraria:
 12 - Um funcionário pode ser cadastrado independente de qualquer coisa;
 13 - Uma compra deve se referir a somente um cliente e um funcionário;
 14 - Uma mídia deve referenciar um gênero;
-15 - Na 10ª compra o cliente ganha 50% de desconto;
+15 - A cada 10 compras o cliente ganha 50% de desconto;
 16 - A partir de 5 unidades de um produto o cliente paga 50% em todas as unidades dele naquela compra;
 17 - Depois de 100 compras o cliente vira vip;
 18 - Clientes vips recebem 10% de desconto em todas as compras.
