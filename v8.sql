@@ -67,9 +67,6 @@ CREATE TABLE public.Autor (
 
 CREATE TABLE public.Midia (
                 IdMidia SERIAL,
-                IdManga INTEGER,
-                IdLivro INTEGER,
-                IdRevista INTEGER,
                 IdGenero INTEGER NOT NULL,
                 IdAutor INTEGER NOT NULL,
                 Data_de_Publicacao DATE NOT NULL,
@@ -120,6 +117,7 @@ CREATE TABLE public.ProdutosComprados (
                 IdCompra INTEGER NOT NULL,
                 IdMidia INTEGER NOT NULL,
                 Quantidade INTEGER NOT NULL CHECK(Quantidade > 0),
+                Desconto_por_unidade FLOAT NOT NULL CHECK(Desconto_por_unidade >= 0),
                 CONSTRAINT produtoscomprados_pk PRIMARY KEY (IdProdutosComprados)
 );
 

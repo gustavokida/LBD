@@ -15,7 +15,7 @@ def create_connection(user: str, password: str, database: str, host: str = "127.
         return False
     return connection
 
-data_types_with_2_args = ['sequence', 'randomdate']
+data_types_with_2_args = ['sequence', 'randomdate', 'boolean']
 data_types_with_4_args = ['fk_integer']
 data_types_with_5_args = ['letters', 'alphanumeric', 'randominteger', 'randomfloat']
 especifications_for_5_argument_types = ['size', 'interval']
@@ -95,6 +95,8 @@ def random_info(data_type: str, begin: int = None, final: int = None):
         return random_integer_in_interval(begin, final)
     elif data_type == 'randomdate':
         return random_date()
+    elif data_type == 'boolean':
+        return random_boolean()
     return ''
 
 def floatTryParse(value):
@@ -157,6 +159,9 @@ def random_date():
     date = '{}-{}-{}'.format(day, mounth, year)
     return date
 
+def random_boolean():
+    return bool(rd.randrange(0, 2))
+
 def get_valid_random_information(connection, table_name: str, field_name: str):
     try:
         query = "SELECT {} FROM {} ORDER BY RANDOM() LIMIT 1;".format(field_name, table_name)
@@ -187,9 +192,13 @@ def create_insert_query(table_name: str, field_name_list: list, field_data_list:
 
     field_name_sql = ''
     field_data_sql = ''
+    sem_aspas = [typefield_data is int,
+                typefield_data is float,
+                field_data == 'NULL',
+                field_data == 'true']
     for field_name, field_data in zip(field_name_list, field_data_list):
         field_name_sql += "{} ".format(field_name)
-        if (type(field_data) is int) or (type(field_data) is float) or (field_data == 'NULL'):
+        if any(sem_aspas):
             field_data_sql += str(field_data) + ' '
         else:
             field_data_sql += "'{}' ".format(field_data)
@@ -217,6 +226,7 @@ def insert_random_data_in_table(table_name: str, field_list: list, rows: int, us
     if rows <= 0:
         return True
 
+    query = ''
     try:
         connection = create_connection(user, password, database, host, port)
         valid_field_list = extract_information_from_fields(field_list)
@@ -252,6 +262,7 @@ def insert_random_data_in_table(table_name: str, field_list: list, rows: int, us
                     final = int(field[4])
                     data_field_list[j] = random_info(data_type, begin, final)
 
+            print(table_name, name_field_list, data_field_list)
             query = create_insert_query(table_name, name_field_list, data_field_list)
             insertion_result = insert_data_in_table(connection, query)
             if not insertion_result:
@@ -261,10 +272,10 @@ def insert_random_data_in_table(table_name: str, field_list: list, rows: int, us
                 print('{} failed inside'.format(table_name))
                 print()
                 return False
-        # print('{} inseridas em {}'.format(rows, table_name))
         return True
     except:
         print('{} failed'.format(table_name))
+        print(query)
         return False
 
 
@@ -274,7 +285,7 @@ table_names_list = list('autor, volume, manga, genero, livro, revista, midia, cl
 fields = ['nacionalidade-letters-size-8-10', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate', 'data_de_falecimento-randomdate']
 fields_dict['autor'] = fields
 
-fields = ['endereco-letters-size-8-10', 'sexo-letters-size-1-1', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate']
+fields = ['endereco-letters-size-8-10', 'sexo-letters-size-1-1', 'nome-letters-size-8-10', 'data_de_nascimento-randomdate', 'vip-randominteger-interval-0-1']
 fields_dict['cliente'] = fields
 
 fields = ['data-randomdate', 'preco_total-randomfloat-interval-50.0-3000', 'desconto-randomfloat-interval-5-10', 'preco_final-randomfloat-interval-500-3000', 'fk_cliente_id-fk_integer-cliente-id', 'fk_funcionario_id-fk_integer-funcionario-id']
@@ -286,16 +297,16 @@ fields_dict['funcionario'] = fields
 fields = ['nome-letters-size-8-10', 'localizacao-letters-size-8-10']
 fields_dict['genero'] = fields
 
-fields = ['nome_do_volume-letters-size-8-10', 'sinopse-letters-size-8-10', 'titulo_do_livro-letters-size-8-10']
+fields = ['sinopse-letters-size-8-10', 'titulo_do_livro-letters-size-8-10', 'edicao-randominteger-interval-1-900', 'paginas-randominteger-interval-1-900']
 fields_dict['livro'] = fields
 
 fields = ['capitulo-randominteger-interval-1-900', 'fk_volume_id-fk_integer-volume-id', 'titulo_do_capitulo-letters-size-8-10']
 fields_dict['manga'] = fields
 
-fields = ['data_de_publicacao-randomdate', 'editora-letters-size-8-10', 'nome-letters-size-8-10', 'idioma-letters-size-8-10', 'local_de_publicacao-letters-size-8-10', 'fk_genero_id-fk_integer-genero-id', 'fk_autor_id-fk_integer-autor-id', 'fk_revista_id-fk_integer-revista-id', 'fk_manga_id-fk_integer-manga-id', 'fk_livro_id-fk_integer-livro-id']
+fields = ['data_de_publicacao-randomdate', 'editora-letters-size-8-10', 'nome-letters-size-8-10', 'idioma-letters-size-8-10', 'valor-randomfloat-interval-50.0-3000', 'local_de_publicacao-letters-size-8-10', 'fk_genero_id-fk_integer-genero-id', 'fk_autor_id-fk_integer-autor-id', 'fk_revista_id-fk_integer-revista-id', 'fk_manga_id-fk_integer-manga-id', 'fk_livro_id-fk_integer-livro-id']
 fields_dict['midia'] = fields
 
-fields = ['fk_compra_id-fk_integer-compra-id', 'fk_midia_id-fk_integer-midia-id']
+fields = ['fk_compra_id-fk_integer-compra-id', 'fk_midia_id-fk_integer-midia-id', 'quantidade-randominteger-interval-1-900', 'desconto_por_unidade-randomfloat-0-0']
 fields_dict['produtos_comprados'] = fields
 
 fields = ['empresa-letters-size-8-10', 'edicao-randominteger-interval-1-900']
